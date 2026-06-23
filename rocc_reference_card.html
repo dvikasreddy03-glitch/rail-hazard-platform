@@ -1,0 +1,496 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.root{padding:1rem 0}
+.hero{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:12px;display:flex;align-items:center;gap:16px}
+.hero-icon{font-size:28px;color:var(--color-text-info);flex-shrink:0}
+.hero-title{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.hero-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.section{margin-bottom:12px}
+.sec-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;padding:0 2px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.svc{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 10px;background:var(--color-background-primary)}
+.svc-port{font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px}
+.svc-name{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:3px}
+.tag{font-size:10px;padding:1px 5px;border-radius:3px;font-weight:500}
+.t-blue{background:var(--color-background-info);color:var(--color-text-info)}
+.t-green{background:var(--color-background-success);color:var(--color-text-success)}
+.t-amber{background:var(--color-background-warning);color:var(--color-text-warning)}
+.t-red{background:var(--color-background-danger);color:var(--color-text-danger)}
+.t-gray{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.flow-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.flow-row:last-child{border-bottom:none}
+.flow-box{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:500;white-space:nowrap}
+.arrow{font-size:11px;color:var(--color-text-secondary)}
+.flow-label{font-size:10px;color:var(--color-text-secondary)}
+.qa-item{padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.qa-item:last-child{border-bottom:none}
+.qa-q{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px;display:flex;gap:6px;align-items:flex-start}
+.qa-a{font-size:11px;color:var(--color-text-secondary);line-height:1.5;padding-left:18px}
+.q-num{flex-shrink:0;width:14px;height:14px;background:var(--color-background-info);color:var(--color-text-info);border-radius:50%;font-size:9px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.metric-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.metric-row:last-child{border-bottom:none}
+.metric-name{color:var(--color-text-secondary)}
+.metric-val{font-weight:500;color:var(--color-text-primary)}
+.action-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:500;cursor:pointer}
+.decision-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.decision-row:last-child{border-bottom:none}
+.sev{width:70px;font-size:10px;font-weight:500;padding:2px 6px;border-radius:3px;text-align:center}
+.act{font-size:11px;font-weight:500}
+.fs-row{display:grid;grid-template-columns:120px 1fr;gap:6px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px;align-items:start}
+.fs-row:last-child{border-bottom:none}
+.fs-trigger{color:var(--color-text-warning);font-weight:500}
+.fs-action{color:var(--color-text-secondary);line-height:1.4}
+.topic-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px}
+.topic-row:last-child{border-bottom:none}
+.topic-name{font-weight:500;color:var(--color-text-primary);width:200px;flex-shrink:0;font-family:var(--font-mono);font-size:10px}
+.topic-flow{color:var(--color-text-secondary);line-height:1.4}
+.adr-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.adr-item{font-size:11px;padding:5px 8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);display:flex;gap:6px;align-items:flex-start}
+.adr-num{font-family:var(--font-mono);font-size:10px;color:var(--color-text-secondary);flex-shrink:0;margin-top:1px}
+.adr-text{color:var(--color-text-primary);line-height:1.3}
+.latency-bar-wrap{margin:4px 0}
+.lat-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:11px}
+.lat-label{width:200px;flex-shrink:0;color:var(--color-text-secondary)}
+.lat-bar-bg{flex:1;height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden;position:relative}
+.lat-bar{height:100%;border-radius:4px}
+.lat-val{width:50px;text-align:right;font-weight:500;color:var(--color-text-primary)}
+.algo-step{display:flex;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px}
+.algo-step:last-child{border-bottom:none}
+.algo-num{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--color-background-info);color:var(--color-text-info);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center}
+.algo-body{flex:1;color:var(--color-text-primary);line-height:1.4}
+.algo-note{font-size:10px;color:var(--color-text-warning);margin-top:2px}
+.tabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
+.tab{font-size:11px;padding:3px 10px;border-radius:4px;border:0.5px solid var(--color-border-secondary);cursor:pointer;color:var(--color-text-secondary);background:var(--color-background-primary)}
+.tab.active{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.panel{display:none}.panel.active{display:block}
+</style>
+
+<div class="root">
+<div class="hero">
+  <i class="ti ti-train hero-icon" aria-hidden="true"></i>
+  <div>
+    <div class="hero-title">ROCC — Rail Operations Control Center</div>
+    <div class="hero-sub">UPRR / LTTS Interview Reference · 6 microservices · 15 ADRs · Java 17 + Angular 19</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('services')">Services</div>
+  <div class="tab" onclick="switchTab('flow')">Event flow</div>
+  <div class="tab" onclick="switchTab('decisions')">Decision matrix</div>
+  <div class="tab" onclick="switchTab('algo')">Train resolver</div>
+  <div class="tab" onclick="switchTab('failsafe')">Fail-safe</div>
+  <div class="tab" onclick="switchTab('latency')">Latency budget</div>
+  <div class="tab" onclick="switchTab('adrs')">ADRs</div>
+  <div class="tab" onclick="switchTab('qa')">Interview Q&amp;A</div>
+</div>
+
+<!-- PANEL: Services -->
+<div class="panel active" id="p-services">
+  <div class="section">
+    <div class="sec-label">Microservice topology</div>
+    <div class="grid2">
+      <div class="svc">
+        <div class="svc-port">:8080</div>
+        <div class="svc-name"><i class="ti ti-shield" aria-hidden="true"></i> API Gateway</div>
+        <div class="svc-tags">
+          <span class="tag t-blue">Spring Cloud Gateway</span>
+          <span class="tag t-green">OAuth2 / OIDC</span>
+          <span class="tag t-gray">Rate limiting</span>
+          <span class="tag t-gray">mTLS</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-port">:8081</div>
+        <div class="svc-name"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Hazard Reporting</div>
+        <div class="svc-tags">
+          <span class="tag t-red">Hazard lifecycle</span>
+          <span class="tag t-blue">Idempotency</span>
+          <span class="tag t-green">PostGIS POINT</span>
+          <span class="tag t-gray">Kafka producer</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-port">:8082</div>
+        <div class="svc-name"><i class="ti ti-cpu" aria-hidden="true"></i> Decision Engine</div>
+        <div class="svc-tags">
+          <span class="tag t-amber">Rule engine (DB)</span>
+          <span class="tag t-blue">Severity classify</span>
+          <span class="tag t-green">Directive gen</span>
+          <span class="tag t-red">Fallback: CAUTION</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-port">:8083</div>
+        <div class="svc-name"><i class="ti ti-broadcast" aria-hidden="true"></i> Train Communication</div>
+        <div class="svc-tags">
+          <span class="tag t-blue">WebSocket/STOMP</span>
+          <span class="tag t-green">ACK tracking</span>
+          <span class="tag t-amber">Retry + DLQ</span>
+          <span class="tag t-gray">Offline buffer</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-port">:8084</div>
+        <div class="svc-name"><i class="ti ti-map-pin" aria-hidden="true"></i> Train Tracking</div>
+        <div class="svc-tags">
+          <span class="tag t-green">PostGIS spatial</span>
+          <span class="tag t-blue">ST_DWithin</span>
+          <span class="tag t-amber">Direction-aware</span>
+          <span class="tag t-gray">Mile post filter</span>
+        </div>
+      </div>
+      <div class="svc">
+        <div class="svc-port">:8085</div>
+        <div class="svc-name"><i class="ti ti-file-certificate" aria-hidden="true"></i> Audit &amp; Compliance</div>
+        <div class="svc-tags">
+          <span class="tag t-blue">FRA / GCOR</span>
+          <span class="tag t-green">Append-only</span>
+          <span class="tag t-gray">Read-only API</span>
+          <span class="tag t-gray">All topics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sec-label">Key cross-cutting concerns</div>
+    <div class="card">
+      <div class="grid3" style="gap:10px">
+        <div>
+          <div style="font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px"><i class="ti ti-eye" aria-hidden="true"></i> Observability</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.5">OpenTelemetry traces<br>Micrometer metrics<br>Structured JSON logs<br>Jaeger + Prometheus + Grafana</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px"><i class="ti ti-lock" aria-hidden="true"></i> Security</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.5">Spring Auth Server<br>OAuth2 + PKCE<br>4 roles (RBAC)<br>mTLS east-west</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px"><i class="ti ti-heart-rate-monitor" aria-hidden="true"></i> Resilience</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.5">Resilience4j CB<br>Retry + backoff<br>Bulkhead (20 calls)<br>TimeLimiter 500ms</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: Event flow -->
+<div class="panel" id="p-flow">
+  <div class="sec-label" style="margin-bottom:6px">End-to-end Kafka event flow</div>
+  <div class="card">
+    <div class="flow-row">
+      <div class="flow-box t-gray">Train / Dispatcher</div><div class="arrow">→</div>
+      <div class="flow-box t-blue">POST /hazards</div><div class="arrow">→</div>
+      <div class="flow-box t-blue">Hazard Service</div><div class="arrow">→</div>
+      <div class="flow-box t-amber">hazard-reported</div>
+      <div class="flow-label">Avro · idempotency check</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box t-amber">hazard-reported</div><div class="arrow">→</div>
+      <div class="flow-box t-blue">Decision Engine</div><div class="arrow">→</div>
+      <div class="flow-label">rule lookup (DB cache)</div><div class="arrow">→</div>
+      <div class="flow-box t-amber">decision-generated</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box t-amber">decision-generated</div><div class="arrow">→</div>
+      <div class="flow-box t-blue">Train Tracking</div><div class="arrow">→</div>
+      <div class="flow-label">AffectedTrainResolver</div><div class="arrow">→</div>
+      <div class="flow-box t-amber">train-ids resolved</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box t-blue">Train Communication</div><div class="arrow">→</div>
+      <div class="flow-box t-green">WebSocket/STOMP</div><div class="arrow">→</div>
+      <div class="flow-box t-gray">Train onboard</div><div class="arrow">→</div>
+      <div class="flow-box t-amber">notification-acknowledged</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-label">All topics →</div>
+      <div class="flow-box t-blue">Audit Service</div>
+      <div class="flow-label">→ append-only log (FRA/GCOR)</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-label">On retry exhaustion →</div>
+      <div class="flow-box t-red">dead-letter-events</div>
+      <div class="flow-label">→ DLQ consumer → backup alert</div>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Kafka topics (9 total)</div>
+  <div class="card">
+    <div class="topic-row"><div class="topic-name">hazard-reported</div><div class="topic-flow">Hazard Svc → Decision Engine, Audit</div></div>
+    <div class="topic-row"><div class="topic-name">hazard-classified</div><div class="topic-flow">Decision Engine → (internal)</div></div>
+    <div class="topic-row"><div class="topic-name">decision-generated</div><div class="topic-flow">Decision Engine → Train Comm., Audit</div></div>
+    <div class="topic-row"><div class="topic-name">notification-created</div><div class="topic-flow">Train Comm. → Audit</div></div>
+    <div class="topic-row"><div class="topic-name">notification-delivered</div><div class="topic-flow">Train Comm. → Audit, Dashboard</div></div>
+    <div class="topic-row"><div class="topic-name">notification-acknowledged</div><div class="topic-flow">Train Comm. → Audit, Dashboard</div></div>
+    <div class="topic-row"><div class="topic-name">dispatcher-override</div><div class="topic-flow">Decision Engine → Audit, Dashboard</div></div>
+    <div class="topic-row"><div class="topic-name">train-location-updated</div><div class="topic-flow">Train Tracking → Train Comm., Audit</div></div>
+    <div class="topic-row"><div class="topic-name">dead-letter-events</div><div class="topic-flow">All services → DLQ consumer → alert</div></div>
+  </div>
+</div>
+
+<!-- PANEL: Decision matrix -->
+<div class="panel" id="p-decisions">
+  <div class="sec-label" style="margin-bottom:6px">Hazard decision matrix (DB-driven, no hardcoding)</div>
+  <div class="card">
+    <div class="decision-row">
+      <div class="sev" style="background:var(--color-background-danger);color:var(--color-text-danger)">CRITICAL</div>
+      <div style="flex:1">
+        <div class="act" style="color:var(--color-text-danger)">EMERGENCY_STOP</div>
+        <div style="font-size:10px;color:var(--color-text-secondary)">Track washout · Bridge failure · Landslide — any type at CRITICAL</div>
+      </div>
+    </div>
+    <div class="decision-row">
+      <div class="sev" style="background:#FEE2E2;color:#991B1B">HIGH</div>
+      <div style="flex:1">
+        <div class="act" style="color:#991B1B">STOP</div>
+        <div style="font-size:10px;color:var(--color-text-secondary)">Wildfire · Fallen tree · Track obstruction</div>
+        <div style="font-size:10px;color:var(--color-text-warning);margin-top:2px">Exception: SIGNAL_FAILURE at HIGH → SPEED_RESTRICTION(10mph)</div>
+      </div>
+    </div>
+    <div class="decision-row">
+      <div class="sev" style="background:var(--color-background-warning);color:var(--color-text-warning)">MEDIUM</div>
+      <div style="flex:1">
+        <div class="act" style="color:var(--color-text-warning)">SPEED_RESTRICTION</div>
+        <div style="font-size:10px;color:var(--color-text-secondary)">Moderate flooding · Visibility issues — configurable mph per type</div>
+      </div>
+    </div>
+    <div class="decision-row">
+      <div class="sev" style="background:var(--color-background-success);color:var(--color-text-success)">LOW</div>
+      <div style="flex:1">
+        <div class="act" style="color:var(--color-text-success)">PROCEED_WITH_CAUTION</div>
+        <div style="font-size:10px;color:var(--color-text-secondary)">Light snow · Minor debris — default for low-severity conditions</div>
+      </div>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Rule engine design</div>
+  <div class="card">
+    <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.7">
+      Rules stored in <strong style="font-weight:500">DecisionRule</strong> table with priority ranking.<br>
+      Rule engine loads on startup, caches with configurable TTL.<br>
+      Priority-based evaluation: first matching rule wins.<br>
+      Admins update rules via <strong style="font-weight:500">ROLE_ADMIN API</strong> — no redeployment needed.<br>
+      Every evaluation logged: <code style="font-size:10px">ruleId · hazardId · action · durationMs</code>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Resilience4j settings</div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-name">Circuit breaker window</span><span class="metric-val">10 calls</span></div>
+    <div class="metric-row"><span class="metric-name">Failure rate threshold</span><span class="metric-val">50%</span></div>
+    <div class="metric-row"><span class="metric-name">Open duration</span><span class="metric-val">10s</span></div>
+    <div class="metric-row"><span class="metric-name">Half-open probe calls</span><span class="metric-val">3</span></div>
+    <div class="metric-row"><span class="metric-name">Retry attempts</span><span class="metric-val">3 × 200ms backoff (×2)</span></div>
+    <div class="metric-row"><span class="metric-name">Timeout per call</span><span class="metric-val">500ms</span></div>
+    <div class="metric-row"><span class="metric-name">Bulkhead concurrency</span><span class="metric-val">20 concurrent calls</span></div>
+  </div>
+</div>
+
+<!-- PANEL: Train resolver algorithm -->
+<div class="panel" id="p-algo">
+  <div class="sec-label" style="margin-bottom:6px">AffectedTrainResolver — 4-step algorithm</div>
+  <div class="card">
+    <div class="algo-step">
+      <div class="algo-num">1</div>
+      <div class="algo-body">
+        <strong style="font-weight:500">Subdivision filter</strong><br>
+        SELECT trains WHERE subdivision_id = hazard.subdivision_id AND status = ACTIVE
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-num">2</div>
+      <div class="algo-body">
+        <strong style="font-weight:500">Spatial proximity filter (PostGIS)</strong><br>
+        ST_DWithin(train.location, hazard.location, radius_meters)<br>
+        <span style="font-size:10px;color:var(--color-text-secondary)">Uses spatial index — O(log n) not O(n). Default impact radius: 5 miles.</span>
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-num">3</div>
+      <div class="algo-body">
+        <strong style="font-weight:500">Direction filter — safety-critical</strong><br>
+        bearing = ST_Azimuth(train.location → hazard.location)<br>
+        Include if: ABS(angleDiff(bearing, train.direction)) ≤ 90°<br>
+        Exclude if: train heading AWAY from hazard
+        <div class="algo-note"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Stale direction data (&gt;60s) → INCLUDE train. Fail-safe: over-notify rather than miss.</div>
+      </div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-num">4</div>
+      <div class="algo-body">
+        <strong style="font-weight:500">Mile post filter (belt-and-suspenders)</strong><br>
+        If mile post data available: exclude trains already PAST hazard mile post in direction of travel.
+      </div>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Unit test scenarios</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-success);font-weight:500">✓ Approaching train</span> — must be included</div>
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-danger);font-weight:500">✗ Receding train</span> — must be excluded</div>
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-warning);font-weight:500">⚠ Perpendicular train</span> — excluded (bearing diff &gt;90°)</div>
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-danger);font-weight:500">⚠ Stale direction</span> — must be included (fail-safe)</div>
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-success);font-weight:500">✓ Multi-subdivision</span> — other subdivisions excluded</div>
+      <div style="padding:4px 0;color:var(--color-text-secondary)"><span style="color:var(--color-text-success);font-weight:500">✓ Beyond mile post</span> — already-passed trains excluded</div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: Fail-safe -->
+<div class="panel" id="p-failsafe">
+  <div class="sec-label" style="margin-bottom:6px">Fail-safe scenarios — safety always wins</div>
+  <div class="card">
+    <div class="fs-row">
+      <div class="fs-trigger"><i class="ti ti-cpu" aria-hidden="true"></i> Decision Engine down</div>
+      <div class="fs-action">Circuit opens → Hazard Service auto-issues PROCEED_WITH_CAUTION → logs degraded-mode event → alerts ROLE_ADMIN</div>
+    </div>
+    <div class="fs-row">
+      <div class="fs-trigger"><i class="ti ti-map-pin" aria-hidden="true"></i> Train Tracking down</div>
+      <div class="fs-action">AffectedTrainResolver falls back to full subdivision broadcast — all active trains notified, no filtering applied</div>
+    </div>
+    <div class="fs-row">
+      <div class="fs-trigger"><i class="ti ti-brand-kafka" aria-hidden="true"></i> Kafka down</div>
+      <div class="fs-action">Producers write to local_event_store (DB table) → FailsafeEventScheduler polls every 30s → replays in order with deduplication</div>
+    </div>
+    <div class="fs-row">
+      <div class="fs-trigger"><i class="ti ti-bell" aria-hidden="true"></i> Notification failure</div>
+      <div class="fs-action">Retry 3× with exponential backoff → DLQ after exhaustion → DLQ consumer triggers email/SMS backup → dispatcher sees UNDELIVERED badge</div>
+    </div>
+    <div class="fs-row">
+      <div class="fs-trigger"><i class="ti ti-wifi-off" aria-hidden="true"></i> WebSocket lost</div>
+      <div class="fs-action">Client reconnects with backoff (1s→2s→4s, max 30s) → server buffers notifications during disconnect → flush buffer on reconnect before new ones</div>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Safety principle</div>
+  <div style="background:var(--color-background-danger);border-radius:var(--border-radius-md);padding:8px 12px;font-size:12px;color:var(--color-text-danger);line-height:1.5">
+    <i class="ti ti-alert-triangle" aria-hidden="true"></i> <strong style="font-weight:500">Safety always takes precedence over throughput.</strong> When in doubt, the system errs toward restriction (PROCEED_WITH_CAUTION or higher) rather than letting trains operate normally under uncertainty. This aligns with FRA and GCOR operating principles.
+  </div>
+</div>
+
+<!-- PANEL: Latency budget -->
+<div class="panel" id="p-latency">
+  <div class="sec-label" style="margin-bottom:6px">End-to-end latency budget (target: &lt;2000ms)</div>
+  <div class="card">
+    <div class="lat-row">
+      <div class="lat-label">Hazard report received</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:2.5%;background:#1D9E75"></div></div>
+      <div class="lat-val">t = 0ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">Kafka publish (hazard-reported)</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:2.5%;background:#1D9E75"></div></div>
+      <div class="lat-val">t = 50ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">Decision Engine: consume + rules</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:7.5%;background:#BA7517"></div></div>
+      <div class="lat-val">t = 150ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">Kafka publish (decision-generated)</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:10%;background:#BA7517"></div></div>
+      <div class="lat-val">t = 200ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">Train Communication: consume</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:12.5%;background:#BA7517"></div></div>
+      <div class="lat-val">t = 250ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">WebSocket push to train</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:15%;background:#D85A30"></div></div>
+      <div class="lat-val">t = 300ms</div>
+    </div>
+    <div class="lat-row">
+      <div class="lat-label">Angular dashboard update</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:20%;background:#D85A30"></div></div>
+      <div class="lat-val">t = 400ms</div>
+    </div>
+    <div class="lat-row" style="margin-top:4px;border-top:0.5px solid var(--color-border-tertiary);padding-top:8px">
+      <div class="lat-label" style="font-weight:500;color:var(--color-text-primary)">Safety margin remaining</div>
+      <div class="lat-bar-bg"><div class="lat-bar" style="width:80%;background:var(--color-background-success)"></div></div>
+      <div class="lat-val" style="color:var(--color-text-success)">1600ms</div>
+    </div>
+  </div>
+  <div class="sec-label" style="margin:10px 0 6px">Custom metrics (13 total)</div>
+  <div class="card">
+    <div class="metric-row"><span class="metric-name">hazards_received_total</span><span class="tag t-blue">counter · tags: type, severity</span></div>
+    <div class="metric-row"><span class="metric-name">decision_generation_latency_ms</span><span class="tag t-green">histogram · p50/p95/p99</span></div>
+    <div class="metric-row"><span class="metric-name">notifications_acknowledged_total</span><span class="tag t-blue">counter</span></div>
+    <div class="metric-row"><span class="metric-name">active_hazards / active_trains</span><span class="tag t-amber">gauge (live)</span></div>
+    <div class="metric-row"><span class="metric-name">circuit_breaker_state</span><span class="tag t-red">gauge · 0=CLOSED 1=OPEN</span></div>
+    <div class="metric-row"><span class="metric-name">kafka_replay_events_total</span><span class="tag t-amber">counter · fail-safe replays</span></div>
+    <div class="metric-row"><span class="metric-name">notification_delivery_latency_ms</span><span class="tag t-green">histogram · p50/p99</span></div>
+  </div>
+</div>
+
+<!-- PANEL: ADRs -->
+<div class="panel" id="p-adrs">
+  <div class="sec-label" style="margin-bottom:6px">Architecture Decision Records (15 ADRs in MADR format)</div>
+  <div class="adr-grid">
+    <div class="adr-item"><div class="adr-num">001</div><div class="adr-text">Event-driven over REST-synchronous — decoupling + at-least-once safety</div></div>
+    <div class="adr-item"><div class="adr-num">002</div><div class="adr-text">Apache Kafka over RabbitMQ/SQS — partitioned, ordered, replayable</div></div>
+    <div class="adr-item"><div class="adr-num">003</div><div class="adr-text">Angular 19 over React — UPRR enterprise ecosystem alignment</div></div>
+    <div class="adr-item"><div class="adr-num">004</div><div class="adr-text">WebSocket/STOMP over SSE — bidirectional ACK + override channel</div></div>
+    <div class="adr-item"><div class="adr-num">005</div><div class="adr-text">OpenTelemetry over proprietary APM — vendor-neutral OTLP standard</div></div>
+    <div class="adr-item"><div class="adr-num">006</div><div class="adr-text">Service-owned databases — fault isolation, independent schema evolution</div></div>
+    <div class="adr-item"><div class="adr-num">007</div><div class="adr-text">Eventual consistency over 2PC — latency vs availability trade-off</div></div>
+    <div class="adr-item"><div class="adr-num">008</div><div class="adr-text">Fail-safe defaults — safety-critical: fail toward restriction</div></div>
+    <div class="adr-item"><div class="adr-num">009</div><div class="adr-text">Notification ACKs — FRA regulatory audit + targeted retry</div></div>
+    <div class="adr-item"><div class="adr-num">010</div><div class="adr-text">Java 17 + Spring Boot 3.x — LTS, virtual threads, GraalVM path</div></div>
+    <div class="adr-item"><div class="adr-num">011</div><div class="adr-text">Resilience4j tuning values — rationale for each CB/retry parameter</div></div>
+    <div class="adr-item"><div class="adr-num">012</div><div class="adr-text">Leaflet + OSM over Google Maps — cost, offline, no vendor lock-in</div></div>
+    <div class="adr-item"><div class="adr-num">013</div><div class="adr-text">NgRx over local state — multi-feature real-time state coherence</div></div>
+    <div class="adr-item"><div class="adr-num">014</div><div class="adr-text">Spring Auth Server over Auth0/Okta — on-premise for sensitive rail data</div></div>
+    <div class="adr-item"><div class="adr-num">015</div><div class="adr-text">PostGIS over app-layer geo math — ST_DWithin spatial index = O(log n)</div></div>
+  </div>
+</div>
+
+<!-- PANEL: Interview Q&A -->
+<div class="panel" id="p-qa">
+  <div class="sec-label" style="margin-bottom:6px">Likely questions from Ms. Rabi &amp; Mr. Hale — with answer anchors</div>
+  <div class="card">
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">1</div>"Why event-driven for a safety system? Doesn't async introduce risk?"</div>
+      <div class="qa-a">At-least-once delivery + Kafka's durable log means no event is lost. Synchronous REST would couple services — if Decision Engine is slow, hazard reporting blocks. Async decoupling lets each service fail independently with defined fallbacks. The 2s budget is satisfied with 1.6s margin.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">2</div>"What happens if the Decision Engine goes down mid-operation?"</div>
+      <div class="qa-a">Circuit breaker opens after 5 failures in a 10-call window. Hazard Reporting's FallbackFactory auto-issues PROCEED_WITH_CAUTION — trains slow down, no danger. Event is buffered in local_event_store. When Decision Engine recovers, the event replays and a proper decision is generated. Dispatcher is alerted to degraded mode.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">3</div>"How does AffectedTrainResolver know which trains to notify?"</div>
+      <div class="qa-a">4-step algorithm: (1) subdivision filter, (2) PostGIS ST_DWithin spatial proximity, (3) direction-bearing filter — only trains whose heading is within ±90° of the bearing toward the hazard, (4) mile post filter to exclude trains already past the hazard. Stale direction data triggers fail-safe inclusion.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">4</div>"How does this scale to Union Pacific's 1,700+ locomotives?"</div>
+      <div class="qa-a">Kafka partitioned by subdivisionId — each partition handled by one Decision Engine instance. K8s HPA scales Train Communication pods on WebSocket connection count. PostGIS spatial index (GiST) keeps ST_DWithin queries at O(log n) regardless of fleet size. Stateless services scale horizontally; only DB needs vertical scaling or read replicas.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">5</div>"How do you ensure a train never misses a critical notification?"</div>
+      <div class="qa-a">Three layers: (1) Kafka at-least-once with @RetryableTopic — 3 retry attempts before DLQ. (2) WebSocket offline buffering — notifications queued per trainId during disconnect, flushed on reconnect. (3) DLQ consumer triggers backup alerting (email/SMS). Every notification has ACK tracking — dispatcher sees UNDELIVERED status in real time.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">6</div>"What FRA / GCOR compliance does this address?"</div>
+      <div class="qa-a">Dedicated Audit &amp; Compliance Service with append-only AuditEvent table — no updates, no deletes. Every action has actor_id, trace_id, and timestamp. Decision rules stored in DB with effective_from timestamps (historical rule state recoverable). Notification ACKs provide proof of delivery. TraceId propagates end-to-end through HTTP → Kafka → WebSocket for complete audit trail.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q"><div class="q-num">7</div>"What would you build next with more time?"</div>
+      <div class="qa-a">PTC (Positive Train Control) integration via ATCS protocol adapters. ML-based severity prediction using historical hazard + outcome data. Geospatial subdivision boundary management from actual UPRR track topology. Real-time weather API integration for predictive hazard scoring. Mobile app for locomotive engineer ACK (currently WebSocket-only).</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('p-'+id).classList.add('active');
+}
+</script>
